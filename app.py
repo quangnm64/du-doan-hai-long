@@ -9,7 +9,6 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Load model và scaler
 MODEL_PATH = 'models/customer_satisfaction_model.pkl'
 SCALER_PATH = 'models/scaler.pkl'
 FEATURE_NAMES_PATH = 'models/feature_names.json'
@@ -49,7 +48,6 @@ def predict():
     try:
         data = request.json
         
-        # Tạo DataFrame từ dữ liệu đầu vào
         input_data = pd.DataFrame([{
             'Age': float(data.get('Age', 0)),
             'Flight_Distance': float(data.get('Flight_Distance', 0)),
@@ -74,13 +72,10 @@ def predict():
             'Class_Eco Plus': 1 if data.get('Class') == 'Eco Plus' else 0,
         }])
         
-        # Đảm bảo thứ tự features đúng
         input_data = input_data.reindex(columns=feature_names, fill_value=0)
         
-        # Chuẩn hóa dữ liệu
         input_scaled = scaler.transform(input_data)
         
-        # Dự đoán
         prediction = model.predict(input_scaled)[0]
         probability = model.predict_proba(input_scaled)[0]
         
@@ -103,12 +98,10 @@ def model_info():
         if model is None:
             return jsonify({'error': 'Model chưa được huấn luyện'}), 404
         
-        # Lấy feature importance nếu có
         feature_importance = {}
         if hasattr(model, 'feature_importances_'):
             importances = model.feature_importances_
             feature_importance = dict(zip(feature_names, importances.tolist()))
-            # Sắp xếp theo độ quan trọng
             feature_importance = dict(sorted(feature_importance.items(), 
                                             key=lambda x: x[1], reverse=True))
         
@@ -121,6 +114,5 @@ def model_info():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    # Tạo thư mục models nếu chưa có
     os.makedirs('models', exist_ok=True)
     app.run(debug=True, host='0.0.0.0', port=5000)

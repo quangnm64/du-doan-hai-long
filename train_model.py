@@ -28,46 +28,11 @@ print()
 print("PHASE 2: DATA UNDERSTANDING")
 print("=" * 60)
 
-dataset_paths = [
-    'data/customer_satisfaction.csv',
-    'data/train.csv',
-    'customer_satisfaction.csv',
-    'train.csv'
-]
 
 df = None
-for path in dataset_paths:
-    if os.path.exists(path):
-        print(f"Đang load dataset từ: {path}")
-        try:
-            df = pd.read_csv(path)
-            print(f"✅ Đã load dataset thành công từ Kaggle!")
-            print(f"   Số lượng mẫu: {len(df)}")
-            print(f"   Số lượng cột: {len(df.columns)}")
-            
-            target_cols = [col for col in df.columns if 'satisfaction' in col.lower() or 
-                          col.lower() in ['target', 'label', 'y']]
-            
-            if target_cols:
-                if 'satisfaction' not in df.columns:
-                    df['satisfaction'] = df[target_cols[0]]
-                    print(f"   Đã tìm thấy target variable: {target_cols[0]}")
-            elif 'satisfaction' not in df.columns:
-                print("⚠️  Cảnh báo: Không tìm thấy cột 'satisfaction' trong dataset")
-                print(f"   Các cột có sẵn: {list(df.columns[:10])}...")
-                print("   Vui lòng đảm bảo dataset có cột target hoặc sửa code để map đúng cột")
-            
-            break
-        except Exception as e:
-            print(f"⚠️  Lỗi khi load {path}: {e}")
-            continue
 
 if df is None:
-    print("⚠️  Không tìm thấy dataset từ Kaggle")
     print("   Đang tạo dữ liệu mẫu để demo...")
-    print("   (Để sử dụng dataset thực tế, tải từ Kaggle và đặt vào thư mục 'data/')")
-    print()
-    
     np.random.seed(42)
     n_samples = 1000
     
