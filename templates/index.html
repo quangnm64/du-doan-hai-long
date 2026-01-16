@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% block title %}Trang chủ - Dự đoán Mức độ Hài lòng
+Khách hàng{% endblock %} {% block content %}
+<div class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">Dự đoán Mức độ Hài lòng Khách hàng</h1>
+      <p class="hero-subtitle">
+        Ứng dụng Machine Learning để dự đoán mức độ hài lòng của khách hàng dựa
+        trên các đặc trưng dịch vụ
+      </p>
+      <a href="/predict" class="btn btn-primary">Bắt đầu Dự đoán</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <section class="section">
+    <h2 class="section-title">Về Dự án</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="card-icon">🎯</div>
+        <h3>Mục tiêu</h3>
+        <p>
+          Xây dựng mô hình machine learning để dự đoán mức độ hài lòng của khách
+          hàng, giúp doanh nghiệp cải thiện chất lượng dịch vụ và tăng tỷ lệ giữ
+          chân khách hàng.
+        </p>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">📊</div>
+        <h3>Quy trình CRISP-DM</h3>
+        <p>
+          Dự án được thực hiện theo quy trình CRISP-DM (Cross Industry Standard
+          Process for Data Mining) với 6 giai đoạn: Business Understanding, Data
+          Understanding, Data Preparation, Modeling, Evaluation, và Deployment.
+        </p>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">🤖</div>
+        <h3>Mô hình ML</h3>
+        <p>
+          Sử dụng các mô hình phân loại như Random Forest, Gradient Boosting, và
+          Logistic Regression để đạt độ chính xác cao trong việc dự đoán.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Quy trình CRISP-DM</h2>
+    <div class="crispdm-steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Business Understanding</h3>
+        <p>
+          Hiểu rõ bài toán và mục tiêu kinh doanh: Dự đoán mức độ hài lòng của
+          khách hàng để cải thiện dịch vụ.
+        </p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Data Understanding</h3>
+        <p>
+          Thu thập và khảo sát dữ liệu: Phân tích các đặc trưng như tuổi, khoảng
+          cách bay, các dịch vụ trên chuyến bay...
+        </p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Data Preparation</h3>
+        <p>
+          Tiền xử lý dữ liệu: Xử lý missing values, encoding categorical
+          variables, chuẩn hóa dữ liệu.
+        </p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Modeling</h3>
+        <p>
+          Xây dựng và huấn luyện các mô hình: So sánh hiệu suất của nhiều mô
+          hình khác nhau.
+        </p>
+      </div>
+      <div class="step">
+        <div class="step-number">5</div>
+        <h3>Evaluation</h3>
+        <p>
+          Đánh giá mô hình: Sử dụng các metrics như Accuracy, Precision, Recall,
+          F1-Score, ROC-AUC.
+        </p>
+      </div>
+      <div class="step">
+        <div class="step-number">6</div>
+        <h3>Deployment</h3>
+        <p>
+          Triển khai ứng dụng: Xây dựng web application để người dùng có thể sử
+          dụng mô hình dự đoán.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Các Tính năng</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <h4>🔮 Dự đoán Thời gian Thực</h4>
+        <p>Nhập thông tin khách hàng và nhận kết quả dự đoán ngay lập tức</p>
+      </div>
+      <div class="feature-item">
+        <h4>📈 Phân tích Mô hình</h4>
+        <p>Xem các metrics đánh giá và feature importance của mô hình</p>
+      </div>
+      <div class="feature-item">
+        <h4>📊 Trực quan hóa Dữ liệu</h4>
+        <p>Xem confusion matrix và các biểu đồ phân tích</p>
+      </div>
+      <div class="feature-item">
+        <h4>🎯 Độ chính xác Cao</h4>
+        <p>Mô hình được tối ưu hóa để đạt độ chính xác tốt nhất</p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

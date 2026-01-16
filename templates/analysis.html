@@ -1,0 +1,172 @@
+{% extends "base.html" %} {% block title %}Phân tích - Customer Satisfaction
+Predictor{% endblock %} {% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>Phân tích Mô hình</h1>
+    <p>Xem các metrics đánh giá và feature importance của mô hình</p>
+  </div>
+
+  <div class="analysis-container">
+    <section class="analysis-section">
+      <h2>Thông tin Mô hình</h2>
+      <div id="modelInfo" class="info-card">
+        <p>Đang tải thông tin...</p>
+      </div>
+    </section>
+
+    <section class="analysis-section">
+      <h2>Feature Importance</h2>
+      <div id="featureImportance" class="info-card">
+        <p>Đang tải dữ liệu...</p>
+      </div>
+    </section>
+
+    <section class="analysis-section">
+      <h2>Confusion Matrix</h2>
+      <div class="image-container">
+        <img
+          src="{{ url_for('static', filename='confusion_matrix.png') }}"
+          alt="Confusion Matrix"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <p style="display: none">Chạy train_model.py để tạo confusion matrix</p>
+      </div>
+    </section>
+
+    <section class="analysis-section">
+      <h2>Top Features</h2>
+      <div class="image-container">
+        <img
+          src="{{ url_for('static', filename='feature_importance.png') }}"
+          alt="Feature Importance"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <p style="display: none">
+          Chạy train_model.py để tạo feature importance chart
+        </p>
+      </div>
+    </section>
+
+    <section class="analysis-section">
+      <h2>CRISP-DM Process Overview</h2>
+      <div class="crispdm-overview">
+        <div class="phase-card">
+          <h3>Phase 1: Business Understanding</h3>
+          <ul>
+            <li>Mục tiêu: Dự đoán mức độ hài lòng khách hàng</li>
+            <li>Loại bài toán: Binary Classification</li>
+            <li>Ứng dụng: Cải thiện chất lượng dịch vụ</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3>Phase 2: Data Understanding</h3>
+          <ul>
+            <li>Dataset: Customer satisfaction survey data</li>
+            <li>Số lượng mẫu: 1000+ records</li>
+            <li>Features: 20+ đặc trưng (dịch vụ, thông tin khách hàng)</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3>Phase 3: Data Preparation</h3>
+          <ul>
+            <li>Xử lý missing values</li>
+            <li>One-hot encoding cho categorical variables</li>
+            <li>StandardScaler cho normalization</li>
+            <li>Train/Test split: 80/20</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3>Phase 4: Modeling</h3>
+          <ul>
+            <li>
+              Mô hình thử nghiệm: Logistic Regression, Random Forest, Gradient
+              Boosting
+            </li>
+            <li>Cross-validation: 5-fold CV</li>
+            <li>Hyperparameter tuning</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3>Phase 5: Evaluation</h3>
+          <ul>
+            <li>Metrics: Accuracy, Precision, Recall, F1-Score, ROC-AUC</li>
+            <li>Confusion Matrix analysis</li>
+            <li>Feature importance analysis</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <h3>Phase 6: Deployment</h3>
+          <ul>
+            <li>Flask web application</li>
+            <li>RESTful API endpoints</li>
+            <li>Interactive frontend</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+  // Load model info
+  async function loadModelInfo() {
+    try {
+      const response = await fetch('/api/model_info');
+      const data = await response.json();
+
+      if (response.ok) {
+        document.getElementById('modelInfo').innerHTML = `
+                <div class="info-item">
+                    <strong>Loại mô hình:</strong> ${data.model_type}
+                </div>
+                <div class="info-item">
+                    <strong>Số lượng features:</strong> ${data.num_features}
+                </div>
+            `;
+
+        // Display feature importance
+        if (
+          data.feature_importance &&
+          Object.keys(data.feature_importance).length > 0
+        ) {
+          const features = Object.entries(data.feature_importance)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 10);
+
+          let html = '<div class="feature-list">';
+          features.forEach(([feature, importance]) => {
+            html += `
+                        <div class="feature-item">
+                            <span class="feature-name">${feature}</span>
+                            <div class="feature-bar">
+                                <div class="feature-fill" style="width: ${
+                                  importance * 100
+                                }%"></div>
+                            </div>
+                            <span class="feature-value">${(
+                              importance * 100
+                            ).toFixed(2)}%</span>
+                        </div>
+                    `;
+          });
+          html += '</div>';
+          document.getElementById('featureImportance').innerHTML = html;
+        } else {
+          document.getElementById('featureImportance').innerHTML =
+            '<p>Feature importance không khả dụng cho mô hình này.</p>';
+        }
+      } else {
+        document.getElementById(
+          'modelInfo'
+        ).innerHTML = `<p class="error">${data.error}</p>`;
+      }
+    } catch (error) {
+      document.getElementById(
+        'modelInfo'
+      ).innerHTML = `<p class="error">Lỗi: ${error.message}</p>`;
+    }
+  }
+
+  loadModelInfo();
+</script>
+{% endblock %}

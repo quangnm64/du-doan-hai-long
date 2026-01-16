@@ -1,0 +1,381 @@
+{% extends "base.html" %} {% block title %}Dự đoán - Customer Satisfaction
+Predictor{% endblock %} {% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>Dự đoán Mức độ Hài lòng Khách hàng</h1>
+    <p>Nhập thông tin khách hàng để dự đoán mức độ hài lòng</p>
+  </div>
+
+  <div class="predict-container">
+    <div class="form-section">
+      <form id="predictForm" class="prediction-form">
+        <div class="form-group">
+          <label for="Age">Tuổi (Age)</label>
+          <input
+            type="number"
+            id="Age"
+            name="Age"
+            min="18"
+            max="100"
+            value="35"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="Flight_Distance">Khoảng cách bay (km)</label>
+          <input
+            type="number"
+            id="Flight_Distance"
+            name="Flight_Distance"
+            min="100"
+            max="5000"
+            value="1000"
+            required
+          />
+        </div>
+
+        <h3 class="form-section-title">Đánh giá Dịch vụ (0-5)</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Inflight_wifi_service">WiFi trên máy bay</label>
+            <input
+              type="number"
+              id="Inflight_wifi_service"
+              name="Inflight_wifi_service"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Food_and_drink">Đồ ăn & Đồ uống</label>
+            <input
+              type="number"
+              id="Food_and_drink"
+              name="Food_and_drink"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Seat_comfort">Độ thoải mái ghế ngồi</label>
+            <input
+              type="number"
+              id="Seat_comfort"
+              name="Seat_comfort"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Inflight_entertainment">Giải trí trên máy bay</label>
+            <input
+              type="number"
+              id="Inflight_entertainment"
+              name="Inflight_entertainment"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="On_board_service">Dịch vụ trên máy bay</label>
+            <input
+              type="number"
+              id="On_board_service"
+              name="On_board_service"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Inflight_service">Dịch vụ trong chuyến bay</label>
+            <input
+              type="number"
+              id="Inflight_service"
+              name="Inflight_service"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Online_boarding">Đăng ký trực tuyến</label>
+            <input
+              type="number"
+              id="Online_boarding"
+              name="Online_boarding"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Checkin_service">Dịch vụ check-in</label>
+            <input
+              type="number"
+              id="Checkin_service"
+              name="Checkin_service"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Baggage_handling">Xử lý hành lý</label>
+            <input
+              type="number"
+              id="Baggage_handling"
+              name="Baggage_handling"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Leg_room_service">Không gian chân</label>
+            <input
+              type="number"
+              id="Leg_room_service"
+              name="Leg_room_service"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Cleanliness">Độ sạch sẽ</label>
+            <input
+              type="number"
+              id="Cleanliness"
+              name="Cleanliness"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Ease_of_Online_booking">Dễ dàng đặt trực tuyến</label>
+            <input
+              type="number"
+              id="Ease_of_Online_booking"
+              name="Ease_of_Online_booking"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Gate_location">Vị trí cổng</label>
+            <input
+              type="number"
+              id="Gate_location"
+              name="Gate_location"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Departure_Arrival_time_convenient"
+              >Thời gian khởi hành/đến</label
+            >
+            <input
+              type="number"
+              id="Departure_Arrival_time_convenient"
+              name="Departure_Arrival_time_convenient"
+              min="0"
+              max="5"
+              value="3"
+              required
+            />
+          </div>
+        </div>
+
+        <h3 class="form-section-title">Thông tin Khách hàng</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Gender">Giới tính</label>
+            <select id="Gender" name="Gender" required>
+              <option value="Male">Nam</option>
+              <option value="Female">Nữ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="Customer_Type">Loại khách hàng</label>
+            <select id="Customer_Type" name="Customer_Type" required>
+              <option value="Loyal Customer">Khách hàng trung thành</option>
+              <option value="disloyal Customer">
+                Khách hàng không trung thành
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Type_of_Travel">Loại chuyến đi</label>
+            <select id="Type_of_Travel" name="Type_of_Travel" required>
+              <option value="Business travel">Công tác</option>
+              <option value="Personal Travel">Cá nhân</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="Class">Hạng ghế</label>
+            <select id="Class" name="Class" required>
+              <option value="Business">Thương gia</option>
+              <option value="Eco Plus">Phổ thông Plus</option>
+              <option value="Eco">Phổ thông</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-large">Dự đoán</button>
+      </form>
+    </div>
+
+    <div class="result-section">
+      <div id="resultCard" class="result-card hidden">
+        <h2>Kết quả Dự đoán</h2>
+        <div id="predictionResult" class="prediction-result">
+          <!-- Kết quả sẽ được hiển thị ở đây -->
+        </div>
+        <div id="probabilityChart" class="probability-chart">
+          <!-- Biểu đồ xác suất sẽ được hiển thị ở đây -->
+        </div>
+      </div>
+      <div id="loadingSpinner" class="loading-spinner hidden">
+        <div class="spinner"></div>
+        <p>Đang xử lý...</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+  document
+    .getElementById('predictForm')
+    .addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+
+      // Convert numeric fields
+      Object.keys(data).forEach((key) => {
+        if (
+          key !== 'Gender' &&
+          key !== 'Customer_Type' &&
+          key !== 'Type_of_Travel' &&
+          key !== 'Class'
+        ) {
+          data[key] = parseFloat(data[key]);
+        }
+      });
+
+      const resultCard = document.getElementById('resultCard');
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      const predictionResult = document.getElementById('predictionResult');
+
+      resultCard.classList.add('hidden');
+      loadingSpinner.classList.remove('hidden');
+
+      try {
+        const response = await fetch('/api/predict', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          // Hiển thị kết quả
+          const isSatisfied = result.prediction === 'Hài lòng';
+          const satisfactionClass = isSatisfied ? 'satisfied' : 'unsatisfied';
+
+          predictionResult.innerHTML = `
+                <div class="prediction-badge ${satisfactionClass}">
+                    <h3>${result.prediction}</h3>
+                    <p class="confidence">Độ tin cậy: ${(
+                      result.confidence * 100
+                    ).toFixed(2)}%</p>
+                </div>
+                <div class="probability-details">
+                    <div class="prob-item">
+                        <span class="prob-label">Hài lòng:</span>
+                        <div class="prob-bar">
+                            <div class="prob-fill satisfied" style="width: ${
+                              result.probability_satisfied * 100
+                            }%"></div>
+                            <span class="prob-value">${(
+                              result.probability_satisfied * 100
+                            ).toFixed(2)}%</span>
+                        </div>
+                    </div>
+                    <div class="prob-item">
+                        <span class="prob-label">Không hài lòng:</span>
+                        <div class="prob-bar">
+                            <div class="prob-fill unsatisfied" style="width: ${
+                              result.probability_unsatisfied * 100
+                            }%"></div>
+                            <span class="prob-value">${(
+                              result.probability_unsatisfied * 100
+                            ).toFixed(2)}%</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+          loadingSpinner.classList.add('hidden');
+          resultCard.classList.remove('hidden');
+        } else {
+          throw new Error(result.error || 'Có lỗi xảy ra');
+        }
+      } catch (error) {
+        loadingSpinner.classList.add('hidden');
+        predictionResult.innerHTML = `<div class="error-message">Lỗi: ${error.message}</div>`;
+        resultCard.classList.remove('hidden');
+      }
+    });
+</script>
+{% endblock %}

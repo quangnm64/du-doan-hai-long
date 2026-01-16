@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}Dự đoán Mức độ Hài lòng Khách hàng{% endblock %}
+    </title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-brand">
+          <h1>📊 Customer Satisfaction Predictor</h1>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="/" class="nav-link">Trang chủ</a></li>
+          <li><a href="/predict" class="nav-link">Dự đoán</a></li>
+          <li><a href="/analysis" class="nav-link">Phân tích</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">{% block content %}{% endblock %}</main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>
+          &copy; 2024 Đồ án Khai phá Dữ liệu - Dự đoán Mức độ Hài lòng Khách
+          hàng
+        </p>
+        <p>Quy trình CRISP-DM | Flask Web Application</p>
+      </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

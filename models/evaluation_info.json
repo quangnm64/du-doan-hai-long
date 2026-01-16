@@ -1,0 +1,24 @@
+{
+  "best_model": "Gradient Boosting",
+  "metrics": {
+    "accuracy": 0.82,
+    "precision": 0.3333333333333333,
+    "recall": 0.02857142857142857,
+    "f1": 0.05263157894736842,
+    "auc": 0.5645021645021645
+  },
+  "all_models": {
+    "Logistic Regression": {
+      "accuracy": 0.825,
+      "f1": 0.0
+    },
+    "Random Forest": {
+      "accuracy": 0.825,
+      "f1": 0.0
+    },
+    "Gradient Boosting": {
+      "accuracy": 0.82,
+      "f1": 0.05263157894736842
+    }
+  }
+}
